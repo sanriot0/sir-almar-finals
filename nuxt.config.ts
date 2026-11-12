@@ -1,23 +1,21 @@
-import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
-  //...
-  build: {
-    transpile: ['vuetify'],
-  },
-  vite: {
-    plugins: [
-      vuetify({ autoImport: true }),
-    ],
-    vue: {
-      template: {
-        transformAssetUrls,
-      },
-    },
-  },
+  compatibilityDate: '2024-04-03',
+  devtools: { enabled: true },
+  modules: ['vuetify-nuxt-module'],
   runtimeConfig: {
     public: {
-      //@ts-ignore
-      googleClientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID
+      googleClientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID || ''
+    }
+  },
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://accounts.google.com/gsi/client',
+          async: true,
+          defer: true
+        }
+      ]
     }
   }
 })
